@@ -38,3 +38,10 @@ var io = require('socket.io')(serve);
 serve.listen(app.get('port'), function() {
     console.log('Express server listening on port ' + app.get('port'));
 });
+
+io.on('connection', function (socket) {
+    console.log('a user connected');
+    socket.on('disconnect', function () {
+        console.log('user disconnected');
+    });
+});
