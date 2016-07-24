@@ -8,7 +8,7 @@ var routes = require('./routes');
 var user = require('./routes/user');
 var http = require('http');
 var path = require('path');
-var mongo = require('mongodb').MongoClient;
+
 var app = express();
 
 // all environments
@@ -49,10 +49,3 @@ io.on('connection', function (socket) {
     });
 });
 
-mongo.connect(process.env.CUSTOMCONNSTR_MONGOLAB_URI, function (err, db) {
-    var collection = db.collection('chat messages');
-    collection.insert({ content: msg }, function(err, o) {
-        if (err) { console.warn(err.message); }
-        else { console.log("chat message inserted into db: " + msg); }
-    });
-});
